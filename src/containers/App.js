@@ -1,28 +1,43 @@
-import React, {createContext} from 'react'
+import React from 'react'
 
-const ToggleContext = createContext(
-    {
-        toggle: true,
-        handleToggle: () => {
-        }
-    });
+const AppContext = React.createContext({
+    theme: 'light',
+    size: '2x',
+});
 
-export default class ToggleProvider extends React.Component {
+const Toolbar = () => {
+    return (
+        <div>
+            <ThemedButton/>
+        </div>
+    );
+};
 
-    handleToggle = () => {
-        this.setState({toggle: !this.state.toggle})
-    };
+class ThemedButton extends React.Component {
+    static contextType = AppContext;
 
-    state = {
-        toggle: true,
-        handleToggle: this.handleToggle
-    };
+    render() {
+        const {theme, size} = this.context;
+        return (
+            <button theme={theme} size={size}>
+                {theme}, {size}
+            </button>
+        );
+    }
+}
+
+export class ProviderDemo extends React.Component {
 
     render() {
         return (
-            <ToggleContext.Provider value={this.state}>
-                {this.props.children}
-            </ToggleContext.Provider>
-        )
+            <AppContext.Provider
+                value={{
+                    theme: 'dark',
+                    size: '1x',
+                }}
+            >
+                <Toolbar/>
+            </AppContext.Provider>
+        );
     }
 }

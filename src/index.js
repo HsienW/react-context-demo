@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './style/index.css';
-import App from './containers/App';
+import {ProviderDemo} from './containers/App';
+// import {AppChildren} from './containers/AppChildren';
 import * as serviceWorker from './common/serviceWorker';
+import './style/index.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <div>
+        <ProviderDemo/>
+    </div>
+    , document.getElementById('root'));
 serviceWorker.unregister();

@@ -1,8 +1,13 @@
 import React from 'react'
+import {ThemedButton} from './AppChildren';
 
 const AppContext = React.createContext({
     theme: 'light',
     size: '2x',
+});
+
+const TwoAppContext = React.createContext({
+    name: 'hello',
 });
 
 const Toolbar = () => {
@@ -13,18 +18,7 @@ const Toolbar = () => {
     );
 };
 
-class ThemedButton extends React.Component {
-    static contextType = AppContext;
-
-    render() {
-        const {theme, size} = this.context;
-        return (
-            <button theme={theme} size={size}>
-                {theme}, {size}
-            </button>
-        );
-    }
-}
+// export const ConsumerDemo= AppContext.Consumer;
 
 export class ProviderDemo extends React.Component {
 
@@ -32,12 +26,17 @@ export class ProviderDemo extends React.Component {
         return (
             <AppContext.Provider
                 value={{
-                    theme: 'dark',
+                    theme: 'eeeeeeeeeeeee',
                     size: '1x',
                 }}
             >
-                <Toolbar/>
+                <TwoAppContext.Provider value={{name: 'Guest'}}>
+                    <Toolbar/>
+                </TwoAppContext.Provider>
             </AppContext.Provider>
         );
     }
 }
+
+export const MyContext = AppContext;
+export const TwoMyContext = TwoAppContext;

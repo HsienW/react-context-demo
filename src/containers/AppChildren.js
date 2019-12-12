@@ -1,14 +1,17 @@
 import React from 'react'
-import {ToggleConsumer} from './App';
+import {MyContext} from './App';
 
-export class AppChildren extends React.Component {
+export class ThemedButton extends React.Component {
 
     render() {
-        console.log(this.props);
         return (
-            <ToggleConsumer>
-                AppChildren
-            </ToggleConsumer>
-        )
+            <MyContext.Consumer>
+                {({theme, size, name}) => (
+                    <button theme={theme} size={size}>
+                        {theme}, {size}, {name}
+                    </button>
+                )}
+            </MyContext.Consumer>
+        );
     }
 }

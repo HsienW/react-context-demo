@@ -1,17 +1,17 @@
 import React from 'react'
-import {MyContext} from './App';
+import {CommonLayoutContext} from './App';
 
 export class ThemedButton extends React.Component {
 
+    static contextType = CommonLayoutContext;
+
     render() {
+        console.log('[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[');
+        console.log(this.context);
         return (
-            <MyContext.Consumer>
-                {({theme, size, name}) => (
-                    <button theme={theme} size={size}>
-                        {theme}, {size}, {name}
-                    </button>
-                )}
-            </MyContext.Consumer>
+            <CommonLayoutContext.Consumer>
+            </CommonLayoutContext.Consumer>
         );
     }
 }
+ThemedButton.contextType = CommonLayoutContext;

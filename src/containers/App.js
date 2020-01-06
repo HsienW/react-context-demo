@@ -1,42 +1,30 @@
 import React from 'react'
 import {ThemedButton} from './AppChildren';
 
-const AppContext = React.createContext({
-    theme: 'light',
-    size: '2x',
-});
+export const CommonLayoutContext = React.createContext({path: ''});
 
-const TwoAppContext = React.createContext({
-    name: 'hello',
-});
+export class CommonLayoutProvider extends React.Component {
 
-const Toolbar = () => {
-    return (
-        <div>
-            <ThemedButton/>
-        </div>
-    );
-};
+    state = {
+        showLoading: false,
+    };
 
-// export const ConsumerDemo= AppContext.Consumer;
-
-export class ProviderDemo extends React.Component {
+    toggleShowLoading = (toggleState) => {
+        this.setState({
+            showLoading: toggleState,
+        });
+    };
 
     render() {
         return (
-            <AppContext.Provider
+            <CommonLayoutContext.Provider
                 value={{
-                    theme: 'eeeeeeeeeeeee',
-                    size: '1x',
+                    showLoading: this.state.showLoading,
+                    toggleShowLoading: this.toggleShowLoading
                 }}
             >
-                <TwoAppContext.Provider value={{name: 'Guest'}}>
-                    <Toolbar/>
-                </TwoAppContext.Provider>
-            </AppContext.Provider>
+                <ThemedButton />
+            </CommonLayoutContext.Provider>
         );
     }
 }
-
-export const MyContext = AppContext;
-export const TwoMyContext = TwoAppContext;
